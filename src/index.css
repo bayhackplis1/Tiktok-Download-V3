@@ -1,0 +1,236 @@
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;900&family=Source+Code+Pro:wght@400;600&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 3%;
+    --foreground: 180 100% 50%;
+    --card: 0 0% 8%;
+    --card-foreground: 180 100% 50%;
+    --popover: 0 0% 8%;
+    --popover-foreground: 180 100% 50%;
+    --primary: 180 100% 50%;
+    --primary-foreground: 0 0% 0%;
+    --secondary: 280 100% 50%;
+    --secondary-foreground: 180 100% 50%;
+    --muted: 0 0% 12%;
+    --muted-foreground: 180 50% 40%;
+    --accent: 330 100% 50%;
+    --accent-foreground: 180 100% 50%;
+    --destructive: 0 100% 50%;
+    --destructive-foreground: 0 0% 0%;
+    --border: 180 100% 20%;
+    --input: 180 100% 15%;
+    --ring: 180 100% 50%;
+    --radius: 0.75rem;
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply antialiased;
+    font-family: 'Orbitron', 'Source Code Pro', monospace;
+    background: #000000;
+    color: #00ffff;
+    overflow-x: hidden;
+    position: relative;
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: 
+      radial-gradient(circle at 10% 20%, rgba(0, 255, 255, 0.15) 0%, transparent 20%),
+      radial-gradient(circle at 90% 80%, rgba(255, 0, 255, 0.15) 0%, transparent 20%),
+      radial-gradient(circle at 50% 50%, rgba(0, 255, 128, 0.1) 0%, transparent 30%);
+    animation: pulse-glow 8s ease-in-out infinite;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  body::after {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: 
+      linear-gradient(0deg, rgba(0, 255, 255, 0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0, 255, 255, 0.03) 1px, transparent 1px);
+    background-size: 40px 40px;
+    animation: grid-move 20s linear infinite;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  #root {
+    position: relative;
+    z-index: 1;
+  }
+
+  ::selection {
+    background: rgba(0, 255, 255, 0.3);
+    color: #ffffff;
+  }
+}
+
+.cyber-glow {
+  text-shadow: 
+    0 0 10px rgba(0, 255, 255, 0.8),
+    0 0 20px rgba(0, 255, 255, 0.6),
+    0 0 30px rgba(0, 255, 255, 0.4),
+    0 0 40px rgba(0, 255, 255, 0.2);
+  animation: neon-flicker 3s ease-in-out infinite;
+}
+
+.matrix-rain {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.15;
+}
+
+.matrix-char {
+  position: absolute;
+  color: #00ff88;
+  font-family: 'Source Code Pro', monospace;
+  font-size: 14px;
+  animation: matrix-fall linear infinite;
+  text-shadow: 0 0 5px #00ff88;
+}
+
+@keyframes matrix-fall {
+  0% {
+    transform: translateY(-100%);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(100vh);
+    opacity: 0;
+  }
+}
+
+@keyframes neon-flicker {
+  0%, 100% {
+    text-shadow: 
+      0 0 10px rgba(0, 255, 255, 0.8),
+      0 0 20px rgba(0, 255, 255, 0.6),
+      0 0 30px rgba(0, 255, 255, 0.4);
+  }
+  50% {
+    text-shadow: 
+      0 0 15px rgba(0, 255, 255, 1),
+      0 0 30px rgba(0, 255, 255, 0.8),
+      0 0 45px rgba(0, 255, 255, 0.6);
+  }
+}
+
+@keyframes pulse-glow {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.7;
+    transform: scale(1.1);
+  }
+}
+
+@keyframes grid-move {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(40px);
+  }
+}
+
+@keyframes scan-line {
+  0% {
+    transform: translateY(-100%);
+  }
+  100% {
+    transform: translateY(100vh);
+  }
+}
+
+.scan-effect {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(to bottom, transparent, rgba(0, 255, 255, 0.5), transparent);
+  animation: scan-line 8s linear infinite;
+  pointer-events: none;
+  z-index: 999;
+}
+
+.hologram-effect {
+  position: relative;
+}
+
+.hologram-effect::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -2px;
+  right: -2px;
+  bottom: 0;
+  background: linear-gradient(90deg, 
+    transparent,
+    rgba(0, 255, 255, 0.1) 25%,
+    rgba(255, 0, 255, 0.1) 50%,
+    rgba(0, 255, 255, 0.1) 75%,
+    transparent
+  );
+  animation: hologram-sweep 3s linear infinite;
+  pointer-events: none;
+}
+
+@keyframes hologram-sweep {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+.glitch {
+  position: relative;
+  animation: glitch-animation 5s infinite;
+}
+
+@keyframes glitch-animation {
+  0%, 90%, 100% {
+    transform: translate(0);
+  }
+  92% {
+    transform: translate(-2px, 2px);
+  }
+  94% {
+    transform: translate(2px, -2px);
+  }
+  96% {
+    transform: translate(-2px, -2px);
+  }
+  98% {
+    transform: translate(2px, 2px);
+  }
+}
+
